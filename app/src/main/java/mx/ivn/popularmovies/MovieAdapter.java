@@ -41,7 +41,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         Movie movie = movieList.get(position);
-        Picasso.with(context).load(movie.getPosterUrl()).into(MovieViewHolder.vPoster);
+        Picasso.with(context).load(movie.getPosterUrl()).placeholder(R.drawable.placeholder_poster)
+                .into(MovieViewHolder.vPoster);
         MovieViewHolder.vTitle.setText(movie.getTitle());
         MovieViewHolder.vRating.setText(String.valueOf(movie.getUserRating()).concat("★"));
     }
