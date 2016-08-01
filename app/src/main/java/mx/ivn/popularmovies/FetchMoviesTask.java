@@ -112,7 +112,7 @@ public class FetchMoviesTask extends AsyncTask<String, Void, Movie[]> {
         final String RELEASE_DATE = "release_date";
         final String ORIGINAL_TITLE = "original_title";
         final String TITLE = "title";
-        final String USER_RATING = "vote_count";
+        final String USER_RATING = "vote_average";
 
         JSONObject forecastJson = new JSONObject(movieResultJsonStr);
         JSONArray movieJsonArray = forecastJson.getJSONArray(MOVIE_RESULTS);
@@ -127,7 +127,7 @@ public class FetchMoviesTask extends AsyncTask<String, Void, Movie[]> {
                     movieJson.getString(RELEASE_DATE),
                     movieJson.getString(ORIGINAL_TITLE),
                     movieJson.getString(TITLE),
-                    movieJson.getString(USER_RATING)
+                    movieJson.getDouble(USER_RATING)
             );
         }
 

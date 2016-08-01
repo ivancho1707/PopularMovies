@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by ivancho on 7/31/16.
+ *
  */
 public class Movie implements Serializable {
     public String posterUrl;
@@ -11,10 +12,10 @@ public class Movie implements Serializable {
     public String releaseDate;
     public String originalTitle;
     public String title;
-    public String userRating;
+    public Double userRating;
 
     public Movie(String posterUrl, String synopsis, String releaseDate, String originalTitle,
-                 String title, String userRating) {
+                 String title, Double userRating) {
         this.posterUrl = posterUrl;
         this.synopsis = synopsis;
         this.releaseDate = releaseDate;
@@ -63,11 +64,11 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
-    public String getUserRating() {
+    public Double getUserRating() {
         return userRating;
     }
 
-    public void setUserRating(String userRating) {
+    public void setUserRating(Double userRating) {
         this.userRating = userRating;
     }
 }
