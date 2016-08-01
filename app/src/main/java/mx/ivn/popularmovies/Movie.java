@@ -1,5 +1,7 @@
 package mx.ivn.popularmovies;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 /**
@@ -14,9 +16,16 @@ public class Movie implements Serializable {
     public String title;
     public Double userRating;
 
+    final String IMG_BASE_URL = "http://image.tmdb.org/t/p/";
+    final String IMG_SIZE = "w185";
+
     public Movie(String posterUrl, String synopsis, String releaseDate, String originalTitle,
                  String title, Double userRating) {
-        this.posterUrl = posterUrl;
+        Uri builtUri = Uri.parse(IMG_BASE_URL).buildUpon()
+                .appendPath(IMG_SIZE)
+                .appendPath(posterUrl.replaceFirst("/", ""))
+                .build();
+        this.posterUrl = builtUri.toString();
         this.synopsis = synopsis;
         this.releaseDate = releaseDate;
         this.originalTitle = originalTitle;
