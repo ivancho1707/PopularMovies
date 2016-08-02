@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -39,12 +40,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position) {
+    public void onBindViewHolder(MovieViewHolder holder, final int position) {
         Movie movie = movieList.get(position);
         Picasso.with(context).load(movie.getPosterUrl()).placeholder(R.drawable.placeholder_poster)
                 .into(MovieViewHolder.vPoster);
         MovieViewHolder.vTitle.setText(movie.getTitle());
         MovieViewHolder.vRating.setText(String.valueOf(movie.getUserRating()).concat("★"));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, movieList.get(position).getOriginalTitle(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

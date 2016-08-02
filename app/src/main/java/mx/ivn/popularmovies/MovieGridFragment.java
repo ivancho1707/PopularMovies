@@ -25,7 +25,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,7 +34,9 @@ import java.util.Arrays;
  * A placeholder fragment containing a simple view.
  */
 public class MovieGridFragment extends Fragment {
-    public RecyclerView recList;
+
+    private final String LOG_TAG = this.getClass().getSimpleName();
+    private RecyclerView recList;
 
     public MovieGridFragment() {
     }
@@ -164,9 +165,8 @@ public class MovieGridFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Movie[] movies) {
-            recList.setAdapter(new MovieAdapter(new ArrayList<>(Arrays.asList(movies)),
-                    getContext()));
-            //recList.invalidate();
+            ArrayList<Movie> gridItems = new ArrayList<>(Arrays.asList(movies));
+            recList.setAdapter(new MovieAdapter(gridItems, getContext()));
         }
 
         private Movie[] getMovieDataFromJson(String movieResultJsonStr) throws JSONException {
