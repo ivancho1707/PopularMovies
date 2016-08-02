@@ -1,12 +1,11 @@
 package mx.ivn.popularmovies;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,7 +34,6 @@ import java.util.Arrays;
  */
 public class MovieGridFragment extends Fragment {
 
-    private final String LOG_TAG = this.getClass().getSimpleName();
     private RecyclerView recList;
 
     public MovieGridFragment() {
@@ -172,6 +170,7 @@ public class MovieGridFragment extends Fragment {
         private Movie[] getMovieDataFromJson(String movieResultJsonStr) throws JSONException {
             final String MOVIE_RESULTS = "results";
             final String POSTER_URL = "poster_path";
+            final String BANNER_URL = "backdrop_path";
             final String SYNOPSIS = "overview";
             final String RELEASE_DATE = "release_date";
             final String ORIGINAL_TITLE = "original_title";
@@ -187,6 +186,7 @@ public class MovieGridFragment extends Fragment {
                 JSONObject movieJson = movieJsonArray.getJSONObject(i);
                 movieArray[i] = new Movie(
                         movieJson.getString(POSTER_URL),
+                        movieJson.getString(BANNER_URL),
                         movieJson.getString(SYNOPSIS),
                         movieJson.getString(RELEASE_DATE),
                         movieJson.getString(ORIGINAL_TITLE),

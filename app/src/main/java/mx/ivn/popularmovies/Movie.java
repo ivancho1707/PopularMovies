@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 public class Movie implements Serializable {
     public String posterUrl;
+    public String bannerUrl;
     public String synopsis;
     public String releaseDate;
     public String originalTitle;
@@ -17,15 +18,21 @@ public class Movie implements Serializable {
     public Double userRating;
 
     final String IMG_BASE_URL = "http://image.tmdb.org/t/p/";
-    final String IMG_SIZE = "w185";
+    final String POSTER_SIZE = "w185";
+    final String BANNER_SIZE = "w500";
 
-    public Movie(String posterUrl, String synopsis, String releaseDate, String originalTitle,
-                 String title, Double userRating) {
-        Uri builtUri = Uri.parse(IMG_BASE_URL).buildUpon()
-                .appendPath(IMG_SIZE)
+    public Movie(String posterUrl, String bannerUrl, String synopsis, String releaseDate,
+                 String originalTitle, String title, Double userRating) {
+        Uri posterUri = Uri.parse(IMG_BASE_URL).buildUpon()
+                .appendPath(POSTER_SIZE)
                 .appendPath(posterUrl.replaceFirst("/", ""))
                 .build();
-        this.posterUrl = builtUri.toString();
+        Uri bannerUri = Uri.parse(IMG_BASE_URL).buildUpon()
+                .appendPath(BANNER_SIZE)
+                .appendPath(bannerUrl.replaceFirst("/", ""))
+                .build();
+        this.posterUrl = posterUri.toString();
+        this.bannerUrl = bannerUri.toString();
         this.synopsis = synopsis;
         this.releaseDate = releaseDate;
         this.originalTitle = originalTitle;
@@ -39,6 +46,14 @@ public class Movie implements Serializable {
 
     public void setPosterUrl(String posterUrl) {
         this.posterUrl = posterUrl;
+    }
+
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
     }
 
     public String getSynopsis() {

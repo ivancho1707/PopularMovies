@@ -1,9 +1,9 @@
 package mx.ivn.popularmovies;
 
 import android.content.Context;
-import android.support.v7.widget.ContentFrameLayout;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +49,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, movieList.get(position).getOriginalTitle(),
-                        Toast.LENGTH_SHORT).show();
+                Movie movie = movieList.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("movieData", movie);
+                Intent intent = new Intent(context, MovieDetailActivity.class);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }
